@@ -5,7 +5,9 @@ import router from '@/router';
 
 
 const registerPlugins = (app: any) => {
-    app.use(createPinia()).use(router).use(vueTify)
+    const pinia = createPinia()
+	
+    app.use(pinia).use(router).use(vueTify)
 }
 
 
