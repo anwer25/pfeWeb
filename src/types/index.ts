@@ -7,20 +7,28 @@ export interface LoginPayload {
 }
 
 export interface UserData {
-  expiresIn: null | string
-  Authorization: null | string
+  expiresIn: string
+  Authorization: string
   data: {
-    id: null | string
-    login: null | string
-    name: null | string
-    surname: null | string
-    role: null | string
-    createdAt: null | string
-    updatedAt: null | string
+    id: string
+    login: string
+    name: string
+    surname: string
+    role: string
+    createdAt: string
+    updatedAt: string
   }
+  isAuthenticated: boolean
 }
 
 export interface ClientProps {
   auth: AuthApi
   users: BaseApi
+}
+
+export interface NavBarListProps {
+  link: string
+  title: string
+  icon: string
+  role: string
 }

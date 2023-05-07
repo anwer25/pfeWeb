@@ -43,6 +43,7 @@ export class AuthService {
 		return {
 			...token,
 			data: user,
+			isAuthenticated: true,
 		};
 	}
 

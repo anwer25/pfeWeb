@@ -1,6 +1,7 @@
 <script lang="ts">
 import { ref } from 'vue'
 import { Client } from '@/api'
+import router from '@/router'
 export default {
   name: 'LoginForm',
   setup() {
@@ -11,7 +12,7 @@ export default {
       await Client.auth.login({
         login: email.value,
         password: password.value
-      }).then((data)=> console.log(data))
+      }).then((res)=> res? router.push('/dashboard'): null)
     }
     return {
       email,

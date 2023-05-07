@@ -1,13 +1,25 @@
+import type { NavBarListProps } from '@/types'
+
 export const authStorageData = {
-  expiresIn: null,
-  Authorization: null,
+  expiresIn: '',
+  Authorization: '',
   data: {
-    id: null,
-    login: null,
-    name: null,
-    surname: null,
-    role: null,
-    createdAt: null,
-    updatedAt: null
-  }
+    id: '',
+    login: '',
+    name: '',
+    surname: '',
+    role: '',
+    createdAt: '',
+    updatedAt: ''
+  },
+  isAuthenticated: false
 }
+
+export const sideBarLinks: NavBarListProps[] = [
+  {
+    link: '/users',
+    title: 'Users',
+    icon: 'fa-solid fa-user',
+    role: 'Admin'
+  }
+]

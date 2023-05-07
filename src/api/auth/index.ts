@@ -1,4 +1,4 @@
-import $axios from '../instance'
+import $axios, { storage } from '../instance'
 import { useCommon } from '@/stores'
 import { useStorage } from '@vueuse/core'
 import type { Axios } from 'axios'
@@ -20,6 +20,7 @@ class AuthApi {
       this.store.setIsLoading(true)
       const { data } = await this.axios.post('/auth/login', payload)
       this.saveToken(data)
+      return data.isAuthenticated
     } catch ({ message }: any) {
       this.store.setSnackBar({ show: true, message })
     } finally {
@@ -31,8 +32,11 @@ class AuthApi {
     const { value } = useStorage('userData', authStorageData)
   }
 
-  saveToken(data: UserData) {
-    const storage = useStorage('userData', data)
+  saveToken({ Authorization, data, expiresIn, isAuthenticated }: UserData) {
+    storage.value.Authorization = Authorization
+    storage.value.data = data
+    storage.value.expiresIn = expiresIn
+    storage.value.isAuthenticated = isAuthenticated
   }
 }
 

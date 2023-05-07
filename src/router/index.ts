@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PageLoginVue from '@/views/PageLogin.vue'
+import {PageDashboard, PageLogin} from '@/views';
+import { storage } from '@/api/instance';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,14 +8,24 @@ const router = createRouter({
     {
       path: '/',
       name: 'login',
-      component: PageLoginVue
+      component: PageLogin
     },
     {
-      path: '/home',
-      name: 'home',
-      component: 'undefined'
+      path: '/dashboard',
+      name: 'dashboard',
+      component: PageDashboard
     }
   ]
+})
+
+router.beforeEach((to, from, next)=> {
+  if(to.fullPath === "/dashboard" && !storage.value.isAuthenticated){
+    router.push('/')
+  }else if(to.fullPath === "/" && storage.value.isAuthenticated){
+    router.push('/dashboard')
+  }else {
+    next()
+  }
 })
 
 export default router
